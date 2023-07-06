@@ -4,10 +4,17 @@
   <p><%= @restaurant.category %></p>
   <h3>Address:</h3>
   <p><%= @restaurant.address %></p>
+  <h3>Phone:</h3>
+  <p><%= @restaurant.phone_number %></p>
+  <hr>
   <ul>
+    <h5>Reviews:</h5>
     <% @restaurant.reviews.each do |review|%>
-      <li><p><%= review %></p></li>
+      <li><p><%= review.content %>  Rating <%= review.rating %>/5</p></li>
     <% end %>
   </ul>
+  <hr>
   <p><%= link_to "Back to restaurants", restaurants_path %></p>
+  <p><%= link_to "Write a Review",  new_restaurant_review_path(@restaurant) %></p>
+  <% puts(@restaurant.reviews) %>
 </div>

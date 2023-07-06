@@ -13,14 +13,18 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    @restaurant.save
-    redirect_to restaurant_path(@restaurant)
+    
+    if @restaurant.save
+      redirect_to restaurant_path(@restaurant), notice: "#{@restaurant.name} was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :category, :reviews, :address)
+    params.require(:restaurant).permit(:name, :category, :reviews, :address, :phone_number)
   end
 
 end
